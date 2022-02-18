@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using dotnet_rpg.Models;
 using dotnet_rpg.Services.CharacterService;
 using System.Threading.Tasks;
+using dotnet_rpg.Dtos.Character;
+using dotnet_rpg.Services.ServiceResponse;
 
 namespace dotnet_rpg.Controllers
 {
@@ -34,10 +36,31 @@ namespace dotnet_rpg.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCharcter(Character newCharacter)
+        public async Task<IActionResult> AddCharcter(AddCharacterDto newCharacter)
         {
             // characters.Add(newCharacter);
             return Ok(await _characterService.AddCharacter(newCharacter));
+        }
+        [HttpPut]
+        public async Task<ActionResult> UpdateCharacter(UpdateCharacterDto updateCharacter)
+        {
+            ServiceResponse<GetCharacterDto> character = await _characterService.UpdateCharacter(updateCharacter);
+            if (character.Data == null)
+            {
+                return BadRequest(character);
+            }
+            return Ok( character);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCharacter(int id)
+        {
+            ServiceResponse<List<GetCharacterDto>> serviceResponse = await _characterService.DeleteCharacter(id);
+            if (serviceResponse.Data == null)
+            {
+                return BadRequest(serviceResponse);
+            }
+            return Ok(serviceResponse);
         }
     }
 
