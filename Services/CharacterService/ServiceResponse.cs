@@ -1,4 +1,4 @@
-namespace dotnet_rpg.Services.ServiceResponse
+namespace dotnet_rpg.Services.CharacterService
 {
     public class ServiceResponse<T>
     {

@@ -2,8 +2,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using dotnet_rpg.Dtos.Character;
 using dotnet_rpg.Models;
-using dotnet_rpg.Services.ServiceResponse;
-
 namespace dotnet_rpg.Services.CharacterService
 {
     public interface ICharacterService

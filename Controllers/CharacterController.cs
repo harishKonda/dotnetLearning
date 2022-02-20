@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using dotnet_rpg.Models;
 using dotnet_rpg.Services.CharacterService;
 using System.Threading.Tasks;
 using dotnet_rpg.Dtos.Character;
-using dotnet_rpg.Services.ServiceResponse;
 
 namespace dotnet_rpg.Controllers
 {
@@ -12,11 +10,6 @@ namespace dotnet_rpg.Controllers
     [Route("[controller]")]
     public class CharacterController : ControllerBase
     {
-        // private static List<Character> characters = new List<Character>{
-        //     new Character(),
-        //     new Character {Name = "Harish", Id = 1,},
-        //     new Character {Name = "Sai kiran", Id = 2, Intelligence = 101,},
-        // };
         private readonly ICharacterService _characterService;
 
         public CharacterController(ICharacterService characterService)
@@ -30,13 +23,13 @@ namespace dotnet_rpg.Controllers
             return Ok(await _characterService.GetAllCharacters());
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> getSingle(int id)
+        public async Task<IActionResult> GetSingleCharacter(int id)
         {
             return Ok(await _characterService.GetCharacterById(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCharcter(AddCharacterDto newCharacter)
+        public async Task<IActionResult> AddCharacter(AddCharacterDto newCharacter)
         {
             // characters.Add(newCharacter);
             return Ok(await _characterService.AddCharacter(newCharacter));
@@ -52,7 +45,7 @@ namespace dotnet_rpg.Controllers
             return Ok( character);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteCharacter(int id)
         {
             ServiceResponse<List<GetCharacterDto>> serviceResponse = await _characterService.DeleteCharacter(id);
