@@ -12,6 +12,7 @@ namespace dotnet_rpg.Models
         public RpgClass Class { get; set; } = RpgClass.Knight;
         public User User { get; set; }  
         public Weapon Weapon { get; set; }
-        
+        public List<CharacterSkill> CharacterSkills { get; set; }
+
     }
 }
