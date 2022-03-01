@@ -50,7 +50,7 @@ namespace dotnet_rpg.Services.WeaponService
             catch (Exception e)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = "Cannot add weapon";
+                serviceResponse.Message = e.Message;
             }
             return serviceResponse;
         }
